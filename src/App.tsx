@@ -1,7 +1,12 @@
+import MultiStepForm from './components/MultiStepForm';
+import UserInfoProvider from './contexts/UserInfoContext';
+
 function App() {
   return (
     <main>
-      Init
+      <UserInfoProvider>
+        <MultiStepForm />
+      </UserInfoProvider>
     </main>
   );
 }

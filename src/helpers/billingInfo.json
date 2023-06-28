@@ -1,0 +1,13 @@
+{
+  "plans": {
+    "arcade": 9,
+    "advanced": 12,
+    "pro": 15
+  },
+  "addons": {
+    "onlineService": 1,
+    "largerStorage": 2,
+    "customProfile": 2
+  },
+  "discount": 2
+}
