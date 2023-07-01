@@ -1,5 +1,14 @@
 import useUserInfoContext from '../hooks/useUserInfoContext';
 import validations from '../helpers/validations';
+import {
+  FormWrapper,
+  Title,
+  Label,
+  TextBox,
+  FormValidationError,
+  FormInputContainer,
+  Subtitle,
+} from '../styles/Components';
 
 export default function YourInfoForm() {
   const { userInfo, setUserInfo } = useUserInfoContext();
@@ -32,16 +41,19 @@ export default function YourInfoForm() {
   };
 
   return (
-    <section>
-      <>
-        <p>Personal info</p>
-        <p>Please provide your name, email, address, and phone number.</p>
-        {userInfo.error.name !== null && <p>{userInfo.error.name}</p>}
-        <label htmlFor="name">Name</label>
-        <input
+    <FormWrapper>
+      <Title>Personal info</Title>
+      <Subtitle>Please provide your name, email address, and phone number.</Subtitle>
+      <FormInputContainer>
+        <Label htmlFor="name">Name</Label>
+        {userInfo.error.name !== null && (
+          <FormValidationError>{userInfo.error.name}</FormValidationError>
+        )}
+        <TextBox
           id="name"
           type="text"
           placeholder="e.g. Stephen King"
+          hasErrors={userInfo.error.name !== null}
           value={userInfo.name}
           onChange={(e) => {
             setUserInfo({ ...userInfo, name: e.target.value });
@@ -50,12 +62,17 @@ export default function YourInfoForm() {
             validateName();
           }}
         />
-        {userInfo.error.email !== null && <p>{userInfo.error.email}</p>}
-        <label htmlFor="email">Name</label>
-        <input
+      </FormInputContainer>
+      <FormInputContainer>
+        <Label htmlFor="email">Email Address</Label>
+        {userInfo.error.email !== null && (
+          <FormValidationError>{userInfo.error.email}</FormValidationError>
+        )}
+        <TextBox
           id="email"
           type="text"
           placeholder="e.g. stephenking@lorem.com"
+          hasErrors={userInfo.error.email !== null}
           value={userInfo.email}
           onChange={(e) => {
             setUserInfo({ ...userInfo, email: e.target.value });
@@ -64,12 +81,17 @@ export default function YourInfoForm() {
             validateEmail();
           }}
         />
-        {userInfo.error.phone !== null && <p>{userInfo.error.phone}</p>}
-        <label htmlFor="phone">Name</label>
-        <input
+      </FormInputContainer>
+      <FormInputContainer>
+        <Label htmlFor="phone">Phone Number</Label>
+        {userInfo.error.phone !== null && (
+          <FormValidationError>{userInfo.error.phone}</FormValidationError>
+        )}
+        <TextBox
           id="phone"
           type="text"
           placeholder="e.g. +1 234 567 890"
+          hasErrors={userInfo.error.phone !== null}
           value={userInfo.phone}
           onChange={(e) => {
             setUserInfo({ ...userInfo, phone: e.target.value });
@@ -78,7 +100,7 @@ export default function YourInfoForm() {
             validatePhone();
           }}
         />
-      </>
-    </section>
+      </FormInputContainer>
+    </FormWrapper>
   );
 }

@@ -1,49 +1,76 @@
 import { useContext } from 'react';
 import { MultiStepFormContext } from './MultiStepForm';
+import {
+  SideBar,
+  SideBarItem,
+  SideBarButton,
+  SideBarWrapper,
+  SideBarText,
+} from '../styles/Components';
 
 export default function FormNavigation() {
-  const { goTo } = useContext(MultiStepFormContext) ?? {};
+  const { goTo, currStep } = useContext(MultiStepFormContext) ?? {};
   const contextError = 'Context was not loaded properly';
   return (
-    <div>
-      <div>
-        <button
+    <SideBar>
+      <SideBarWrapper>
+        <SideBarItem
           onClick={() => {
             goTo != null ? goTo(0) : console.error(contextError);
           }}
+          htmlFor="form1"
         >
-          <img src="" alt="" />
-          <p>STEP 1</p>
-          <p>YOUR INFO</p>
-        </button>
-        <button
+          <SideBarButton id="form1" isActive={currStep === 0}>
+            1
+          </SideBarButton>
+          <SideBarText>
+            <p>STEP 1</p>
+            <p>YOUR INFO</p>
+          </SideBarText>
+        </SideBarItem>
+        <SideBarItem
           onClick={() => {
             goTo != null ? goTo(1) : console.error(contextError);
           }}
+          htmlFor="form2"
         >
-          <img src="" alt="" />
-          <p>STEP 2</p>
-          <p>SELECT PLAN</p>
-        </button>
-        <button
+          <SideBarButton id="form2" isActive={currStep === 1}>
+            2
+          </SideBarButton>
+          <SideBarText>
+            <p>STEP 2</p>
+            <p>SELECT PLAN</p>
+          </SideBarText>
+        </SideBarItem>
+        <SideBarItem
           onClick={() => {
             goTo != null ? goTo(2) : console.error(contextError);
           }}
+          htmlFor="form3"
         >
-          <img src="" alt="" />
-          <p>STEP 3</p>
-          <p>ADD-ONS</p>
-        </button>
-        <button
+          <SideBarButton id="form3" isActive={currStep === 2}>
+            3
+          </SideBarButton>
+          <SideBarText>
+            <p>STEP 3</p>
+            <p>ADD-ONS</p>
+          </SideBarText>
+        </SideBarItem>
+        <SideBarItem
           onClick={() => {
             goTo != null ? goTo(3) : console.error(contextError);
           }}
+          htmlFor="form4"
         >
-          <img src="" alt="" />
-          <p>STEP 4</p>
-          <p>SUMMARY</p>
-        </button>
-      </div>
-    </div>
+          <SideBarButton id="form4" isActive={currStep === 3}>
+            4
+          </SideBarButton>
+          <SideBarText>
+            <p>STEP 4</p>
+            <p>SUMMARY</p>
+          </SideBarText>
+        </SideBarItem>
+      </SideBarWrapper>
+    </SideBar>
   );
 }

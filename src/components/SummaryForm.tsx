@@ -2,6 +2,17 @@ import { type ReactElement, useContext } from 'react';
 import useUserInfoContext from '../hooks/useUserInfoContext';
 import { MultiStepFormContext } from './MultiStepForm';
 import { plans, addons, discount } from '../helpers/billingInfo.json';
+import {
+  ChangePlanButton,
+  CheckoutContainer,
+  CheckoutInfo,
+  CheckoutTotal,
+  FormWrapper,
+  Line,
+  Subtitle,
+  Text,
+  Title,
+} from '../styles/Components';
 
 export default function SummaryForm() {
   const { userInfo } = useUserInfoContext();
@@ -39,53 +50,73 @@ export default function SummaryForm() {
     steps != null ? steps.findIndex((obj: ReactElement) => obj.key === 'SelectPlan') : 0;
 
   return (
-    <section>
+    <FormWrapper>
       {steps !== undefined && goTo !== undefined ? (
         <>
-          <p>Finishing up</p>
-          <p>Double-check everything looks OK before confirming.</p>
-          <div>
-            <div>
-              <p>{userInfo.plan}</p>
-              <p>({userInfo.isYearly ? 'Yearly' : 'Mounthly'})</p>
-              <button
-                onClick={() => {
-                  goTo != null
-                    ? goTo(selectPlanIndex)
-                    : console.error('Context was not loaded properly');
-                }}
-              >
-                Change
-              </button>
-              <span>
+          <Title>Finishing up</Title>
+          <Subtitle>Double-check everything looks OK before confirming.</Subtitle>
+          <CheckoutContainer>
+            <CheckoutInfo>
+              <div>
+                <Text className="highlight">
+                  {userInfo.plan} ({userInfo.isYearly ? 'Yearly' : 'Monthly'})
+                </Text>
+                <ChangePlanButton
+                  onClick={() => {
+                    goTo != null
+                      ? goTo(selectPlanIndex)
+                      : console.error('Context was not loaded properly');
+                  }}
+                >
+                  Change
+                </ChangePlanButton>
+              </div>
+              <Text className="highlight align">
                 ${finalValue.plan}/{abbr}
-              </span>
-            </div>
-            <div>
+              </Text>
+              <Line />
+            </CheckoutInfo>
+            <CheckoutInfo>
               {userInfo.addons.onlineService && (
-                <p>
-                  Online service +$
-                  <span>{finalValue.onlineService}</span>/<span>{abbr}</span>
-                </p>
+                <>
+                  <Text className="fade">Online service</Text>
+                  <Text className="fade addonCheckout">
+                    +${finalValue.onlineService}/{abbr}
+                  </Text>
+                </>
               )}
-            </div>
-            <div>
-              {userInfo.addons.largerStorage &&
-                `Larger storage +$${finalValue.largerStorage}/${abbr}`}
-            </div>
-            <div>
-              {userInfo.addons.customProfile &&
-                `customizable Profile +$${finalValue.customProfile}/${abbr}`}
-            </div>
-            <div>
-              Total (per year)
-              <span>${finalValue.total}</span>/<span>{abbr}</span>
-            </div>
-          </div>
+            </CheckoutInfo>
+            <CheckoutInfo>
+              {userInfo.addons.largerStorage && (
+                <>
+                  <Text className="fade">Larger storage</Text>
+                  <Text className="fade addonCheckout">
+                    +${finalValue.largerStorage}/{abbr}
+                  </Text>
+                </>
+              )}
+            </CheckoutInfo>
+            <CheckoutInfo>
+              {userInfo.addons.customProfile && (
+                <>
+                  <Text className="fade">customizable Profile</Text>
+                  <Text className="fade addonCheckout">
+                    +${finalValue.customProfile}/{abbr}
+                  </Text>
+                </>
+              )}
+            </CheckoutInfo>
+          </CheckoutContainer>
+          <CheckoutTotal>
+            <Text>Total (per {userInfo.isYearly ? 'year' : 'month'})</Text>
+            <p>
+              ${finalValue.total}/{abbr}
+            </p>
+          </CheckoutTotal>
         </>
       ) : (
         'Context was not loaded properly'
       )}
-    </section>
+    </FormWrapper>
   );
 }

@@ -3,68 +3,108 @@ import iconArcade from '../assets/images/icon-arcade.svg';
 import iconAdvanced from '../assets/images/icon-advanced.svg';
 import iconPro from '../assets/images/icon-pro.svg';
 import { plans, discount } from '../helpers/billingInfo.json';
+import {
+  FormWrapper,
+  Label,
+  Option,
+  Plan,
+  OptionInfo,
+  PlansContainer,
+  Subtitle,
+  Text,
+  Title,
+  ToggleButton,
+  ToggleContainer,
+  ToggleInput,
+  ToggleLabel,
+  ToggleText,
+} from '../styles/Components';
 
 export default function SelectPlanForm() {
   const { userInfo, setUserInfo } = useUserInfoContext();
   const multiplier = userInfo.isYearly ? 12 - discount : 1;
+  const abbr = userInfo.isYearly ? 'yr' : 'mo';
 
   return (
-    <section>
-      <p>Select your plan</p>
-      <p>You have the option of monthly or yearly billing.</p>
-      <div>
-        <img src={iconArcade} alt="arcade_icon" />
-        <p>Arcade</p>
-        <p>${plans.arcade * multiplier}/mo</p>
-        {userInfo.isYearly && <p>{discount} mounths free</p>}
-        <input
-          type="radio"
-          value="Arcade"
-          checked={userInfo.plan === 'Arcade'}
-          onChange={(e) => {
-            setUserInfo({ ...userInfo, plan: e.target.value });
-          }}
-        />
-      </div>
-      <div>
-        <img src={iconAdvanced} alt="advanced_icon" />
-        <p>Advanced</p>
-        <p>${plans.advanced * multiplier}/mo</p>
-        {userInfo.isYearly && <p>{discount} mounths free</p>}
-        <input
-          type="radio"
-          value="Advanced"
-          checked={userInfo.plan === 'Advanced'}
-          onChange={(e) => {
-            setUserInfo({ ...userInfo, plan: e.target.value });
-          }}
-        />
-      </div>
-      <div>
-        <img src={iconPro} alt="pro_icon" />
-        <p>Pro</p>
-        <p>${plans.pro * multiplier}/mo</p>
-        {userInfo.isYearly && <p>{discount} mounths free</p>}
-        <input
-          type="radio"
-          value="Pro"
-          checked={userInfo.plan === 'Pro'}
-          onChange={(e) => {
-            setUserInfo({ ...userInfo, plan: e.target.value });
-          }}
-        />
-      </div>
-      <div>
-        <p>Monthly</p>
-        <input
+    <FormWrapper>
+      <Title>Select your plan</Title>
+      <Subtitle>You have the option of monthly or yearly billing.</Subtitle>
+      <PlansContainer>
+        <Plan htmlFor="arcade" isActive={userInfo.plan === 'Arcade'}>
+          <img src={iconArcade} alt="arcade_icon" />
+          <Option
+            type="radio"
+            value="Arcade"
+            id="arcade"
+            checked={userInfo.plan === 'Arcade'}
+            onChange={(e) => {
+              setUserInfo({ ...userInfo, plan: e.target.value });
+            }}
+          />
+          <OptionInfo>
+            <Text className="highlight">Arcade</Text>
+            <Text className="fade">
+              ${plans.arcade * multiplier}/{abbr}
+            </Text>
+            {userInfo.isYearly && <Label>{discount} months free</Label>}
+          </OptionInfo>
+        </Plan>
+        <Plan htmlFor="advanced" isActive={userInfo.plan === 'Advanced'}>
+          <img src={iconAdvanced} alt="advanced_icon" />
+          <Option
+            type="radio"
+            value="Advanced"
+            id="advanced"
+            checked={userInfo.plan === 'Advanced'}
+            onChange={(e) => {
+              setUserInfo({ ...userInfo, plan: e.target.value });
+            }}
+          />
+          <OptionInfo>
+            <Text className="highlight">Advanced</Text>
+            <Text className="fade">
+              ${plans.advanced * multiplier}/{abbr}
+            </Text>
+            {userInfo.isYearly && <Label>{discount} months free</Label>}
+          </OptionInfo>
+        </Plan>
+        <Plan htmlFor="pro" isActive={userInfo.plan === 'Pro'}>
+          <img src={iconPro} alt="pro_icon" />
+          <Option
+            type="radio"
+            value="Pro"
+            id="pro"
+            checked={userInfo.plan === 'Pro'}
+            onChange={(e) => {
+              setUserInfo({ ...userInfo, plan: e.target.value });
+            }}
+          />
+          <OptionInfo>
+            <Text className="highlight">Pro</Text>
+            <Text className="fade">
+              ${plans.pro * multiplier}/{abbr}
+            </Text>
+            {userInfo.isYearly && <Label>{discount} months free</Label>}
+          </OptionInfo>
+        </Plan>
+      </PlansContainer>
+
+      <ToggleContainer>
+        <ToggleText isActive={!userInfo.isYearly}>Monthly</ToggleText>
+        <ToggleInput
+          className="switch-checkbox"
+          id="switchInput"
           type="checkbox"
           checked={userInfo.isYearly}
           onChange={() => {
             setUserInfo({ ...userInfo, isYearly: !userInfo.isYearly });
           }}
         />
-        <p>Yearly</p>
-      </div>
-    </section>
+        <ToggleLabel className="switch-label" htmlFor="switchInput">
+          <ToggleButton className="switch-button" />
+        </ToggleLabel>
+        <ToggleText isActive={userInfo.isYearly}>Yearly</ToggleText>
+      </ToggleContainer>
+    </FormWrapper>
   );
 }

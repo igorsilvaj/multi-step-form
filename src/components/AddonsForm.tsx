@@ -1,16 +1,28 @@
 import useUserInfoContext from '../hooks/useUserInfoContext';
 import { addons, discount } from '../helpers/billingInfo.json';
+import {
+  FormWrapper,
+  AddonContainer,
+  Title,
+  Subtitle,
+  AddonCheckBox,
+  Option,
+  AddonInfo,
+} from '../styles/Components';
 
 export default function AddonsForm() {
   const { userInfo, setUserInfo } = useUserInfoContext();
   const multiplier = userInfo.isYearly ? 12 - discount : 1;
+  const abbr = userInfo.isYearly ? 'yr' : 'mo';
 
   return (
-    <section>
-      <p>Pick Add-ons</p>
-      <p>Add-ons help enhance your gaming experience.</p>
-      <div>
-        <input
+    <FormWrapper>
+      <Title>Pick Add-ons</Title>
+      <Subtitle>Add-ons help enhance your gaming experience.</Subtitle>
+      <AddonContainer htmlFor="onlineService" isActive={userInfo.addons.onlineService}>
+        <Option
+          id="onlineService"
+          className="addon"
           type="checkbox"
           checked={userInfo.addons.onlineService}
           onChange={() => {
@@ -23,12 +35,19 @@ export default function AddonsForm() {
             });
           }}
         />
-        <p>Online service</p>
-        <p>Access to multiplayer games</p>
-        <p>+${addons.onlineService * multiplier}/mo</p>
-      </div>
-      <div>
-        <input
+        <AddonCheckBox isActive={userInfo.addons.onlineService} />
+        <AddonInfo>
+          <p>Online service</p>
+          <p>Access to multiplayer games</p>
+        </AddonInfo>
+        <p>
+          +${addons.onlineService * multiplier}/{abbr}
+        </p>
+      </AddonContainer>
+      <AddonContainer htmlFor="largerStorage" isActive={userInfo.addons.largerStorage}>
+        <Option
+          className="addon"
+          id="largerStorage"
           type="checkbox"
           checked={userInfo.addons.largerStorage}
           onChange={() => {
@@ -41,12 +60,19 @@ export default function AddonsForm() {
             });
           }}
         />
-        <p>Larger storage</p>
-        <p>Extra 1TB of cloud save</p>
-        <p>+${addons.largerStorage * multiplier}/mo</p>
-      </div>
-      <div>
-        <input
+        <AddonCheckBox isActive={userInfo.addons.largerStorage} />
+        <AddonInfo>
+          <p>Larger storage</p>
+          <p>Extra 1TB of cloud save</p>
+        </AddonInfo>
+        <p>
+          +${addons.largerStorage * multiplier}/{abbr}
+        </p>
+      </AddonContainer>
+      <AddonContainer htmlFor="customProfile" isActive={userInfo.addons.customProfile}>
+        <Option
+          id="customProfile"
+          className="addon"
           type="checkbox"
           checked={userInfo.addons.customProfile}
           onChange={() => {
@@ -59,10 +85,15 @@ export default function AddonsForm() {
             });
           }}
         />
-        <p>Customizable Profile</p>
-        <p>Custom theme on your profile</p>
-        <p>+${addons.customProfile * multiplier}/mo</p>
-      </div>
-    </section>
+        <AddonCheckBox isActive={userInfo.addons.customProfile} />
+        <AddonInfo>
+          <p>Customizable Profile</p>
+          <p>Custom theme on your profile</p>
+        </AddonInfo>
+        <p>
+          +${addons.customProfile * multiplier}/{abbr}
+        </p>
+      </AddonContainer>
+    </FormWrapper>
   );
 }

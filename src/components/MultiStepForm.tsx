@@ -8,6 +8,14 @@ import FormSubmissionSuccess from './FormSubmissionSuccess';
 import useUserInfoContext from '../hooks/useUserInfoContext';
 import validations from '../helpers/validations';
 import FormNavigation from './FormNavigation';
+import {
+  ButtonContainer,
+  ConfirmButton,
+  Form,
+  FormContainer,
+  GoBackButton,
+  NextStepButton,
+} from '../styles/Components';
 
 const formsToLoad = [
   <YourInfoForm key="YourInfoForm" />,
@@ -19,6 +27,7 @@ const formsToLoad = [
 interface ContextValue {
   step: ReactElement<any, string | React.JSXElementConstructor<any>>;
   steps: Array<ReactElement<any, string | React.JSXElementConstructor<any>>>;
+  currStep: number;
   isFirstStep: boolean;
   isLastStep: boolean;
   back: () => void;
@@ -49,20 +58,24 @@ export default function MultiStepForm() {
   };
 
   return (
-    <section>
-      {submited ? (
-        <FormSubmissionSuccess />
-      ) : (
-        <MultiStepFormContext.Provider value={formControl}>
-          <FormNavigation />
-          <form onSubmit={onSubmit}>
-            {step}
-            {!isFirstStep && <button onClick={back}>Go Back</button>}
-            {!isLastStep && <button onClick={next}>Next Step</button>}
-            {isLastStep && <button onClick={finishForm}>Finish</button>}
-          </form>
-        </MultiStepFormContext.Provider>
-      )}
-    </section>
+    <FormContainer>
+      <MultiStepFormContext.Provider value={formControl}>
+        <FormNavigation />
+        <Form onSubmit={onSubmit}>
+          {submited ? (
+            <FormSubmissionSuccess />
+          ) : (
+            <>
+              {step}
+              <ButtonContainer>
+                {isLastStep && <ConfirmButton onClick={finishForm}>Confirm</ConfirmButton>}
+                {!isLastStep && <NextStepButton onClick={next}>Next Step</NextStepButton>}
+                {!isFirstStep && <GoBackButton onClick={back}>Go Back</GoBackButton>}
+              </ButtonContainer>
+            </>
+          )}
+        </Form>
+      </MultiStepFormContext.Provider>
+    </FormContainer>
   );
 }
