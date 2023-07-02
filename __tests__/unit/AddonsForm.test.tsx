@@ -27,7 +27,7 @@ describe('AddonsForm Tests', () => {
     const plan1 = screen.getByText(/Online service/i);
     const plan2 = screen.getByText(/Larger storage/i);
     const plan3 = screen.getByText(/Customizable Profile/i);
-    const checkbox = screen.getAllByRole('checkbox');
+    const checkbox = screen.queryAllByTitle('checkbox');
     expect(title).toBeVisible();
     expect(plan1).toBeVisible();
     expect(plan2).toBeVisible();
@@ -44,7 +44,7 @@ describe('AddonsForm Tests', () => {
         </UserInfoProvider>
       </>
     );
-    const onlineService = await screen.findAllByRole('checkbox');
+    const onlineService = screen.queryAllByTitle('checkbox');
     const updatedContext = getByTitle('tester');
 
     expect(updatedContext.innerHTML).toBe('test: false');

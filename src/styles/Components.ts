@@ -16,7 +16,7 @@ export const Main = styled.main`
   background-color: ${color.magnolia};
   height: 100vh;
   width: 100%;
-  min-width: 375px;
+  min-width: 350px;
 
   @media screen and (width > 1000px) {
     align-items: center;
@@ -32,7 +32,7 @@ export const FormContainer = styled.section`
   display: flex;
   flex-flow: column wrap;
   margin-top: 90px;
-  min-width: 375px;
+  min-width: 350px;
 
   @media screen and (width > 1280px) {
     background-color: ${color.white};
@@ -58,7 +58,7 @@ export const SideBar = styled.nav`
   position: absolute;
   top: 0;
   width: 100%;
-  min-width: 375px;
+  min-width: 360px;
 
   @media screen and (width > 1280px) {
     background-image: url(${bgSidebarDesktop});

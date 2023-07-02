@@ -23,19 +23,17 @@ describe('FormNavigation Tests', () => {
         <MultiStepForm />
       </UserInfoProvider>
     );
-    screen.getByRole('button', { name: /step 1 your info/i });
-    screen.getByRole('button', { name: /step 2 select plan/i });
-    screen.getByRole('button', { name: /step 3 add-ons/i });
-    screen.getByRole('button', { name: /step 4 summary/i });
+    screen.getByLabelText(/step 1your info/i);
+    screen.getByLabelText(/step 2select plan/i);
+    screen.getByLabelText(/step 3add-ons/i);
+    screen.getByLabelText(/step 4summary/i);
   });
 
   it('Should throw an error if context is not available', async () => {
     render(<FormNavigation />);
     const consoleErrorSpy = vi.spyOn(console, 'error');
 
-    const btnNavigation = screen.getByRole('button', {
-      name: /step 1 your info/i,
-    });
+    const btnNavigation = screen.getByLabelText(/step 1your info/i);
 
     await userEvent.click(btnNavigation);
 

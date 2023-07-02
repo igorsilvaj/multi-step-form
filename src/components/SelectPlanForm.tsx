@@ -30,7 +30,7 @@ export default function SelectPlanForm() {
       <Title>Select your plan</Title>
       <Subtitle>You have the option of monthly or yearly billing.</Subtitle>
       <PlansContainer>
-        <Plan htmlFor="arcade" isActive={userInfo.plan === 'Arcade'}>
+        <Plan title="radio" htmlFor="arcade" isActive={userInfo.plan === 'Arcade'}>
           <img src={iconArcade} alt="arcade_icon" />
           <Option
             type="radio"
@@ -49,7 +49,7 @@ export default function SelectPlanForm() {
             {userInfo.isYearly && <Label>{discount} months free</Label>}
           </OptionInfo>
         </Plan>
-        <Plan htmlFor="advanced" isActive={userInfo.plan === 'Advanced'}>
+        <Plan title="radio" htmlFor="advanced" isActive={userInfo.plan === 'Advanced'}>
           <img src={iconAdvanced} alt="advanced_icon" />
           <Option
             type="radio"
@@ -68,7 +68,7 @@ export default function SelectPlanForm() {
             {userInfo.isYearly && <Label>{discount} months free</Label>}
           </OptionInfo>
         </Plan>
-        <Plan htmlFor="pro" isActive={userInfo.plan === 'Pro'}>
+        <Plan title="radio" htmlFor="pro" isActive={userInfo.plan === 'Pro'}>
           <img src={iconPro} alt="pro_icon" />
           <Option
             type="radio"
@@ -92,6 +92,7 @@ export default function SelectPlanForm() {
       <ToggleContainer>
         <ToggleText isActive={!userInfo.isYearly}>Monthly</ToggleText>
         <ToggleInput
+          title="checkbox"
           className="switch-checkbox"
           id="switchInput"
           type="checkbox"

@@ -10,7 +10,8 @@ function TestComponent() {
 
   return (
     <div>
-      <span title="tester">{`test: ${userInfo.isYearly}`}</span>
+      <span title="testPaymentFreq">{`test: ${userInfo.isYearly}`}</span>
+      <span title="testSelectedPlan">{`test: ${userInfo.plan}`}</span>
     </div>
   );
 }
@@ -27,7 +28,7 @@ describe('SelectPlanForm Tests', () => {
     const plan1 = screen.getByText(/arcade/i);
     const plan2 = screen.getByText(/advanced/i);
     const plan3 = screen.getByText(/pro/i);
-    const radioBtn = screen.getAllByRole('radio');
+    const radioBtn = screen.queryAllByTitle('radio');
     expect(title).toBeVisible();
     expect(plan1).toBeVisible();
     expect(plan2).toBeVisible();
@@ -44,14 +45,20 @@ describe('SelectPlanForm Tests', () => {
         </UserInfoProvider>
       </>
     );
-    const paymentFreq = screen.getByRole('checkbox');
-    const updatedContext = getByTitle('tester');
+    const paymentFreq = screen.getByTitle('checkbox');
+    const proPlan = screen.getByText(/pro/i);
+    const testPaymentFreq = getByTitle('testPaymentFreq');
+    const testSelectedPlan = getByTitle('testSelectedPlan');
 
-    expect(updatedContext.innerHTML).toBe('test: false');
+    expect(testSelectedPlan.innerHTML).toBe('test: Arcade');
+    expect(testPaymentFreq.innerHTML).toBe('test: false');
+
+    await userEvent.click(proPlan);
     await userEvent.click(paymentFreq);
-    expect(updatedContext.innerHTML).toBe('test: true');
+    expect(testSelectedPlan.innerHTML).toBe('test: Pro');
+    expect(testPaymentFreq.innerHTML).toBe('test: true');
 
-    const extraText = await screen.findAllByText('2 mounths free');
+    const extraText = await screen.findAllByText('2 months free');
     expect(extraText.length).toBe(3);
   });
 });

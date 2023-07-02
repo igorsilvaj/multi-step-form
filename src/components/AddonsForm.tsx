@@ -35,7 +35,7 @@ export default function AddonsForm() {
             });
           }}
         />
-        <AddonCheckBox isActive={userInfo.addons.onlineService} />
+        <AddonCheckBox title="checkbox" isActive={userInfo.addons.onlineService} />
         <AddonInfo>
           <p>Online service</p>
           <p>Access to multiplayer games</p>
@@ -60,7 +60,7 @@ export default function AddonsForm() {
             });
           }}
         />
-        <AddonCheckBox isActive={userInfo.addons.largerStorage} />
+        <AddonCheckBox title="checkbox" isActive={userInfo.addons.largerStorage} />
         <AddonInfo>
           <p>Larger storage</p>
           <p>Extra 1TB of cloud save</p>
@@ -85,7 +85,7 @@ export default function AddonsForm() {
             });
           }}
         />
-        <AddonCheckBox isActive={userInfo.addons.customProfile} />
+        <AddonCheckBox title="checkbox" isActive={userInfo.addons.customProfile} />
         <AddonInfo>
           <p>Customizable Profile</p>
           <p>Custom theme on your profile</p>

@@ -1,5 +1,5 @@
 import validations from '../../src/helpers/validations';
-import { userInfoMounthly } from '../mocks/userInfoContext';
+import { userInfoMonthly } from '../mocks/userInfoContext';
 
 describe('validations helper - Tests', () => {
   it('Should return This field is required', () => {
@@ -30,7 +30,7 @@ describe('validations helper - Tests', () => {
   });
 
   it('Sould return correct object', () => {
-    const teste = validations.validateAll(userInfoMounthly);
+    const teste = validations.validateAll(userInfoMonthly);
     expect(teste).toEqual({ name: null, email: null, phone: null });
   });
 });

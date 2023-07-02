@@ -1,4 +1,4 @@
-export const userInfoMounthly = {
+export const userInfoMonthly = {
   name: 'Stephen King',
   email: 'stephenking@lorem.com',
   phone: '+1 234 567 890',

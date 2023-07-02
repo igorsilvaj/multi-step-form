@@ -50,7 +50,7 @@ describe('Integration between the main component and the forms it loads', () => 
     await userEvent.click(btnNextStep);
     await userEvent.click(btnNextStep);
     await userEvent.click(btnNextStep);
-    const btnFinish = screen.getByRole('button', { name: /finish/i });
+    const btnFinish = screen.getByRole('button', { name: /Confirm/i });
 
     expect(btnFinish).toBeVisible();
   });
@@ -64,7 +64,7 @@ describe('Integration between the main component and the forms it loads', () => 
     await userEvent.click(btnNextStep);
     await userEvent.click(btnNextStep);
     await userEvent.click(btnNextStep);
-    const btnFinish = screen.getByRole('button', { name: /finish/i });
+    const btnFinish = screen.getByRole('button', { name: /Confirm/i });
 
     expect(btnFinish).toBeVisible();
     await userEvent.click(btnFinish);
@@ -73,9 +73,7 @@ describe('Integration between the main component and the forms it loads', () => 
   });
 
   it('Should display the correct form when using the navigation component', async () => {
-    const btnNavigation = screen.getByRole('button', {
-      name: /step 4 summary/i,
-    });
+    const btnNavigation = screen.getByLabelText(/step 4summary/i);
 
     await userEvent.click(btnNavigation);
 
