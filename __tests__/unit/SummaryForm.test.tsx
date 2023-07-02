@@ -1,14 +1,13 @@
 import '@testing-library/jest-dom';
-import { Matcher, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { useContext, useEffect } from 'react';
 import UserInfoProvider, { UserInfoContext } from '../../src/contexts/UserInfoContext';
-import { MultiStepFormContext } from '../../src/components/MultiStepForm';
 import SummaryForm from '../../src/components/SummaryForm';
 import useMultiStepForm from '../../src/hooks/useMultiStepForm';
 import SelectPlanForm from '../../src/components/SelectPlanForm';
 import { userInfoMonthly, userInfoYearly } from '../mocks/userInfoContext';
-import { vi } from 'vitest';
+import { MultiStepFormContext } from '../../src/contexts/MultiStepFormContext';
 
 const formsToLoad = [<SummaryForm key="SummaryForm" />, <SelectPlanForm key="SelectPlan" />];
 

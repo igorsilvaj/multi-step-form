@@ -1,4 +1,4 @@
-import { createContext, type ReactElement, type FormEvent, useState } from 'react';
+import { type FormEvent, useState } from 'react';
 import useMultiStepForm from '../hooks/useMultiStepForm';
 import YourInfoForm from './YourInfoForm';
 import SelectPlanForm from './SelectPlanForm';
@@ -16,6 +16,7 @@ import {
   GoBackButton,
   NextStepButton,
 } from '../styles/Components';
+import { MultiStepFormContext } from '../contexts/MultiStepFormContext';
 
 const formsToLoad = [
   <YourInfoForm key="YourInfoForm" />,
@@ -23,19 +24,6 @@ const formsToLoad = [
   <AddonsForm key="AddonsForm" />,
   <SummaryForm key="SummaryForm" />,
 ];
-
-interface ContextValue {
-  step: ReactElement<any, string | React.JSXElementConstructor<any>>;
-  steps: Array<ReactElement<any, string | React.JSXElementConstructor<any>>>;
-  currStep: number;
-  isFirstStep: boolean;
-  isLastStep: boolean;
-  back: () => void;
-  next: () => void;
-  goTo: (index: number) => void;
-}
-
-export const MultiStepFormContext = createContext<ContextValue | null>(null);
 
 export default function MultiStepForm() {
   const formControl = useMultiStepForm(formsToLoad);

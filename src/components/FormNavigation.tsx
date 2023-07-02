@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { MultiStepFormContext } from './MultiStepForm';
 import {
   SideBar,
   SideBarItem,
@@ -7,6 +6,7 @@ import {
   SideBarWrapper,
   SideBarText,
 } from '../styles/Components';
+import { MultiStepFormContext } from '../contexts/MultiStepFormContext';
 
 export default function FormNavigation() {
   const { goTo, currStep } = useContext(MultiStepFormContext) ?? {};

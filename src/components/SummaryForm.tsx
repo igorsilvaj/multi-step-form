@@ -1,6 +1,5 @@
 import { type ReactElement, useContext } from 'react';
 import useUserInfoContext from '../hooks/useUserInfoContext';
-import { MultiStepFormContext } from './MultiStepForm';
 import { plans, addons, discount } from '../helpers/billingInfo.json';
 import {
   ChangePlanButton,
@@ -13,6 +12,7 @@ import {
   Text,
   Title,
 } from '../styles/Components';
+import { MultiStepFormContext } from '../contexts/MultiStepFormContext';
 
 export default function SummaryForm() {
   const { userInfo } = useUserInfoContext();
