@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import color from './Colors';
 import bgSidebarMobile from '../assets/images/bg-sidebar-mobile.svg';
 import bgSidebarDesktop from '../assets/images/bg-sidebar-desktop.svg';
@@ -90,9 +90,15 @@ export const SideBarWrapper = styled.section`
 export const SideBarItem = styled.label`
   background-color: transparent;
   cursor: pointer;
+
   *:not(:first-child) {
     display: none;
   }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
   @media screen and (width > 1280px) {
     align-items: center;
     display: flex;
@@ -189,6 +195,10 @@ export const NextStepButton = styled.button`
   font-weight: 400;
   padding: 12px 15px;
 
+  &:hover {
+    opacity: 0.7;
+  }
+
   @media screen and (width > 1280px) {
     padding: 16px 22px;
   }
@@ -198,7 +208,8 @@ export const GoBackButton = styled.button`
   background-color: transparent;
   color: ${color.coolGray};
   padding-left: 5px;
-  &:focus {
+
+  &:hover {
     color: ${color.marineBlue};
     font-weight: 500;
   }
@@ -210,6 +221,10 @@ export const ConfirmButton = styled.button`
   color: ${color.white};
   font-weight: 400;
   padding: 12px 21px;
+
+  &:hover {
+    opacity: 0.7;
+  }
 
   @media screen and (width > 1280px) {
     padding: 16px 32px;
@@ -269,6 +284,7 @@ export const TextBox = styled.input<{ hasErrors?: boolean }>`
   border: 1px solid ${(props) => (props.hasErrors ?? false ? color.strawberryRed : color.lightGray)};
   border-radius: 5px;
   color: ${color.marineBlue};
+  cursor: pointer;
   font-weight: 500;
   padding: 10px;
   margin-top: 3px;
@@ -316,6 +332,10 @@ export const Plan = styled.label<{ isActive?: boolean; className?: string }>`
   min-height: 85px;
   padding: 10px;
   position: relative;
+
+  &:hover {
+    border: 1px solid ${color.purplishBlue};
+  }
 
   @media screen and (width > 1280px) {
     height: 180px;
@@ -409,6 +429,10 @@ export const AddonContainer = styled.label<{ isActive?: boolean; className?: str
   justify-content: space-between;
   min-height: 65px;
   padding: 0 15px;
+
+  &:hover {
+    border: 1px solid ${color.purplishBlue};
+  }
 
   p:nth-child(1) {
     /* color: ${color.marineBlue}; */
@@ -560,9 +584,23 @@ export const FormSubmissionContainer = styled.div`
   }
 `;
 
+const spinAnimation = keyframes`
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+`;
+
+export const IconContainer = styled.div`
+  perspective: 1000px;
+`;
+
 export const IconThankYou = styled.img`
   width: 55px;
-
+  animation: ${spinAnimation} 1s linear;
+  transform: rotateY(360deg);
   @media screen and (width > 1280px) {
     width: 80px;
   }
