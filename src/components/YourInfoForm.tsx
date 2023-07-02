@@ -55,6 +55,7 @@ export default function YourInfoForm() {
           placeholder="e.g. Stephen King"
           hasErrors={userInfo.error.name !== null}
           value={userInfo.name}
+          autoComplete="username"
           onChange={(e) => {
             setUserInfo({ ...userInfo, name: e.target.value });
           }}
@@ -74,6 +75,7 @@ export default function YourInfoForm() {
           placeholder="e.g. stephenking@lorem.com"
           hasErrors={userInfo.error.email !== null}
           value={userInfo.email}
+          autoComplete="email"
           onChange={(e) => {
             setUserInfo({ ...userInfo, email: e.target.value });
           }}
@@ -93,6 +95,7 @@ export default function YourInfoForm() {
           placeholder="e.g. +1 234 567 890"
           hasErrors={userInfo.error.phone !== null}
           value={userInfo.phone}
+          autoComplete="tel"
           onChange={(e) => {
             setUserInfo({ ...userInfo, phone: e.target.value });
           }}
